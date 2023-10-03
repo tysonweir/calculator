@@ -1,21 +1,31 @@
 import React from "react";
 import "./App.css";
+import { evaluate } from "mathjs"; // mathjs is a library I brought in to help with the calculations
 
 const App: React.FC = () => {
   const [input, setInput] = React.useState<string>("");
   const [results, setResults] = React.useState<string | number>("0");
 
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  const operators = ["/", "*", "-", "+"];
+  const operators = ["/", "x", "-", "+"];
 
   const handleButtonClick = (value: string) => {
     setInput((prev) => prev + value);
   };
 
   const calculate = () => {
+    const operator = input.split("").find((item) => ["x"].includes(item));
+
     try {
-      setResults(eval(input));
+      let value;
+      if (operator === "x") {
+        value = evaluate(input.replace("x", "*"));
+      } else {
+        value = evaluate(input);
+      }
+      setResults(value.toString()); // want to make sure we have a string
     } catch (error) {
+      console.log(error); // so I can just see the error for now
       setResults("Error");
     }
   };
@@ -35,7 +45,11 @@ const App: React.FC = () => {
           ))}
           <button onClick={() => handleButtonClick("0")}>0</button>
           {operators.map((operator) => (
-            <button key={operator} onClick={() => handleButtonClick(operator)}>
+            <button
+              key={operator}
+              className="operatorButton"
+              onClick={() => handleButtonClick(operator)}
+            >
               {operator}
             </button>
           ))}
