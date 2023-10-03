@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
+const App: React.FC = () => {
+  const [input, setInput] = React.useState<string>("");
+  const [results, setResults] = React.useState<string | number>("0");
+
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const operators = ["/", "*", "-", "+"];
+
+  const handleButtonClick = (value: string) => {
+    setInput((prev) => prev + value);
+  };
+
+  const calculate = () => {
+    try {
+      setResults(eval(input));
+    } catch (error) {
+      setResults("Error");
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="calculator">
+        <div className="display">
+          <div className="input">{input}</div>
+          <div className="result">{results}</div>
+        </div>
+        <div className="buttons">
+          {numbers.map((number) => (
+            <button key={number} onClick={() => handleButtonClick(number)}>
+              {number}
+            </button>
+          ))}
+          <button onClick={() => handleButtonClick("0")}>0</button>
+          {operators.map((operator) => (
+            <button key={operator} onClick={() => handleButtonClick(operator)}>
+              {operator}
+            </button>
+          ))}
+          <button
+            onClick={() => {
+              setInput("");
+              setResults("0");
+            }}
+          >
+            C
+          </button>
+          <button onClick={calculate}>=</button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

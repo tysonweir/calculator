@@ -1,10 +1,22 @@
-# Getting Started with Create React App
+# Simple Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Problem Statement:
 
-## Available Scripts
+Build a simple four function (addition, subtraction, multiplication, division) calculator.
+Your application should be written using React and TypeScript. It must work like a standard calculator.
+Note that you are not required to implement the memory functions (M+/MR/MC).
 
-In the project directory, you can run:
+## Evaluation Criteria:
+
+You will be evaluated on the following criteria: - UI/UX
+
+- Functional accuracy
+- Code architecture/structure, style, and readability
+- Code organization and modularity
+
+## Acceptance Criteria:
+
+At the minimum, your submission should be able to handle the four basic operations + - / \* and display a result when the equals button is pressed.
 
 ### `npm start`
 
